@@ -11,22 +11,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void playSound(int x) {
+    final player = AudioPlayer();
+    player.play(AssetSource('assets_note$x.wav'));
+  }
+
+  Widget buildKey({required Color color, required int soundNum}) {
+    return Expanded(
+      child: ElevatedButton(
+        onPressed: () {
+          playSound(soundNum);
+        },
+        style: ElevatedButton.styleFrom(backgroundColor: color),
+        child: const Text(''),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Xylophone'),
-        ),
+        backgroundColor: Colors.black,
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                final player = AudioPlayer();
-                player.play(AssetSource('assets_note1.wav'));
-              },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              child: const Text(''),
-            )
+            buildKey(color: Colors.red, soundNum: 1),
+            buildKey(color: Colors.orange, soundNum: 2),
+            buildKey(color: Colors.yellow, soundNum: 3),
+            buildKey(color: Colors.green, soundNum: 4),
+            buildKey(color: Colors.teal, soundNum: 5),
+            buildKey(color: Colors.blue, soundNum: 6),
+            buildKey(color: Colors.purple, soundNum: 7),
           ],
         ));
   }

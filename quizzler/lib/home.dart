@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/question.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,16 +10,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Icon> scoreKeeper = [];
-
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.'
-  ];
-
-  List<bool> answers = [false, true, true];
-
   var questionNumber = 0;
+
+  // List<String> questions = [
+  //   'You can lead a cow down stairs but not up stairs.',
+  //   'Approximately one quarter of human bones are in the feet.',
+  //   'A slug\'s blood is green.'
+  // ];
+
+  // List<bool> answers = [false, true, true];
+
+  List<Question> questionBank = [
+    Question(questionText: 'You can lead a cow down stairs but not up stairs.', answer: false),
+    Question(questionText: 'Approximately one quarter of human bones are in the feet.', answer: true),
+    Question(questionText: 'A slug\'s blood is green.', answer: true),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(10),
               child: Center(
                 child: Text(
-                  questions[questionNumber],
+                  questionBank[questionNumber].questionText,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 25,
@@ -52,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor: Colors.green,
                 ),
                 onPressed: () {
-                  bool correctAnswer = answers[questionNumber];
+                  bool correctAnswer = questionBank[questionNumber].answer;
 
                   if (correctAnswer == true) {
                     setState(() {
@@ -95,12 +101,26 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor: Colors.red,
                 ),
                 onPressed: () {
-                  bool correctAnswer = answers[questionNumber];
+                  bool correctAnswer = questionBank[questionNumber].answer;
 
                   if (correctAnswer == false) {
-                    print('user got it correct');
+                    setState(() {
+                      scoreKeeper.add(
+                        const Icon(
+                          Icons.check,
+                          color: Colors.green,
+                        ),
+                      );
+                    });
                   } else {
-                    print('useer got it wrong');
+                    setState(() {
+                      scoreKeeper.add(
+                        const Icon(
+                          Icons.close,
+                          color: Colors.red,
+                        ),
+                      );
+                    });
                   }
                   setState(() {
                     questionNumber++;

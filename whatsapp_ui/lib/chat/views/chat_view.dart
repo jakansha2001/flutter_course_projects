@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_ui/chat_item.dart';
-import 'package:whatsapp_ui/chat_model.dart';
+import 'package:whatsapp_ui/chat/widgets/chat_item.dart';
+import 'package:whatsapp_ui/chat/models/chat_model.dart';
 
 class ChatView extends StatelessWidget {
   const ChatView({super.key});

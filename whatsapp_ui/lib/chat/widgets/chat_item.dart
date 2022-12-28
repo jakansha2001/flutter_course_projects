@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:whatsapp_ui/chat_model.dart';
+import 'package:whatsapp_ui/chat/models/chat_model.dart';
 
 class ChatItem extends StatelessWidget {
   const ChatItem({

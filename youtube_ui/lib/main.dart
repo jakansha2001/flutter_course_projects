@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_ui/home.dart';
 
 void main() => runApp(const MyApp());
 
@@ -9,14 +10,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      home: const HomePage(),
+      theme: ThemeData.dark().copyWith(
+          primaryColor: Colors.black,
+          appBarTheme: const AppBarTheme(color: Colors.black),
+          scaffoldBackgroundColor: Colors.black),
     );
   }
 }

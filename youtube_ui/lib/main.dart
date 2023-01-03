@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: const HomePage(),
+      home: HomePage(),
       theme: ThemeData.dark().copyWith(
           primaryColor: Colors.black,
           appBarTheme: const AppBarTheme(color: Colors.black),

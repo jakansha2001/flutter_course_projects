@@ -44,7 +44,7 @@ class ResultsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    result.keys.first,
+                    result.keys.first.toUpperCase(),
                     style: TextStyle(
                       // color: Color(0xFF24D876),
                       color: result[result.keys.first],

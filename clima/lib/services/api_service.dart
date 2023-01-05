@@ -7,7 +7,7 @@ class ApiService {
 
   ApiService({required this.url});
 
-  Future<void> getData() async {
+  Future getData() async {
     http.Response response = await http.get(
       Uri.parse(
         url,

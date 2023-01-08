@@ -11,7 +11,28 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin {
+  late AnimationController controller; //late variable should be initialised before build()
+  String text = 'Flash Chat';
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync:
+          this, //this is used so that Animation won't render until _WelcomeScreenState is rendered if any other screen's state is initialised here then it will wait for that screen to render and start the animation.
+      duration: const Duration(
+        seconds: 1,
+      ),
+    );
+
+    controller.forward(); //Starts running this animation forwards (towards the end)
+
+    controller.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +52,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: Image.asset('images/logo.png'),
                   ),
                 ),
-                const Text(
-                  'Flash Chat',
-                  style: TextStyle(
+                Text(
+                  text.substring(0, (controller.value * text.length).toInt()),
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 45.0,
                     fontWeight: FontWeight.w900,

@@ -2,6 +2,9 @@
 
 import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flash_chat/constants.dart';
+import 'package:flash_chat/screens/chat_screen.dart';
+import 'package:flash_chat/screens/registration_screen.dart';
+import 'package:flash_chat/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,6 +17,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String? userEmail;
+  String? password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                userEmail = value;
               },
               decoration: textFieldInputDecoration.copyWith(
                 hintText: 'Enter your email',
@@ -47,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                password = value;
               },
               decoration: textFieldInputDecoration.copyWith(
                 hintText: 'Enter your password',
@@ -59,7 +65,40 @@ class _LoginScreenState extends State<LoginScreen> {
             RoundedButton(
               buttonText: 'Log In',
               color: Colors.lightBlueAccent,
-              onPressed: () {},
+              onPressed: () async {
+                FocusManager.instance.primaryFocus!.unfocus();
+                if (userEmail == null && password == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('E-mail Id and Password, both can\'t be empty!!'),
+                    ),
+                  );
+                } else if (userEmail == null || password == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('E-mail Id or Password can\'t be empty!!'),
+                    ),
+                  );
+                } else {
+                  final message = await AuthService.login(email: userEmail!, password: password!);
+                  if (message.contains('Success')) {
+                    Navigator.pushNamed(context, ChatScreen.id);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(message),
+                      ),
+                    );
+                  }
+                }
+              },
+            ),
+            RoundedButton(
+              buttonText: 'Register',
+              color: Colors.grey.shade400,
+              onPressed: () async {
+                Navigator.pushNamed(context, RegistrationScreen.id);
+              },
             ),
           ],
         ),

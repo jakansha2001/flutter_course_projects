@@ -28,8 +28,13 @@ class _CityScreenState extends State<CityScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
+                  onPressed: () async {
+                    FocusManager.instance.primaryFocus!.unfocus();
+                    await Future.delayed(
+                      const Duration(seconds: 1),
+                    ).then(
+                      (value) => Navigator.pop(context),
+                    );
                   },
                   child: const Icon(
                     Icons.arrow_back_ios,
@@ -70,8 +75,13 @@ class _CityScreenState extends State<CityScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () {
-                  Navigator.pop(context, cityName);
+                onPressed: () async {
+                  FocusManager.instance.primaryFocus!.unfocus();
+                  await Future.delayed(
+                    const Duration(seconds: 1),
+                  ).then(
+                    (value) => Navigator.pop(context, cityName),
+                  );
                 },
                 child: const Text(
                   'Get Weather',

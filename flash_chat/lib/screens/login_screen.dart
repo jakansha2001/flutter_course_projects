@@ -26,81 +26,83 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Hero(
-              tag: 'logo',
-              child: SizedBox(
-                height: 200.0,
-                child: Image.asset('images/logo.png'),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Hero(
+                tag: 'logo',
+                child: SizedBox(
+                  height: 200.0,
+                  child: Image.asset('images/logo.png'),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 48.0,
-            ),
-            TextField(
-              onChanged: (value) {
-                userEmail = value;
-              },
-              decoration: textFieldInputDecoration.copyWith(
-                hintText: 'Enter your email',
+              const SizedBox(
+                height: 48.0,
               ),
-            ),
-            const SizedBox(
-              height: 8.0,
-            ),
-            TextField(
-              onChanged: (value) {
-                password = value;
-              },
-              decoration: textFieldInputDecoration.copyWith(
-                hintText: 'Enter your password',
+              TextField(
+                onChanged: (value) {
+                  userEmail = value;
+                },
+                decoration: textFieldInputDecoration.copyWith(
+                  hintText: 'Enter your email',
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 24.0,
-            ),
-            RoundedButton(
-              buttonText: 'Log In',
-              color: Colors.lightBlueAccent,
-              onPressed: () async {
-                FocusManager.instance.primaryFocus!.unfocus();
-                if (userEmail == null && password == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('E-mail Id and Password, both can\'t be empty!!'),
-                    ),
-                  );
-                } else if (userEmail == null || password == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('E-mail Id or Password can\'t be empty!!'),
-                    ),
-                  );
-                } else {
-                  final message = await AuthService.login(email: userEmail!, password: password!);
-                  if (message.contains('Success')) {
-                    Navigator.pushNamed(context, ChatScreen.id);
-                  } else {
+              const SizedBox(
+                height: 8.0,
+              ),
+              TextField(
+                onChanged: (value) {
+                  password = value;
+                },
+                decoration: textFieldInputDecoration.copyWith(
+                  hintText: 'Enter your password',
+                ),
+              ),
+              const SizedBox(
+                height: 24.0,
+              ),
+              RoundedButton(
+                buttonText: 'Log In',
+                color: Colors.lightBlueAccent,
+                onPressed: () async {
+                  FocusManager.instance.primaryFocus!.unfocus();
+                  if (userEmail == null && password == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(message),
+                      const SnackBar(
+                        content: Text('E-mail Id and Password, both can\'t be empty!!'),
                       ),
                     );
+                  } else if (userEmail == null || password == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('E-mail Id or Password can\'t be empty!!'),
+                      ),
+                    );
+                  } else {
+                    final message = await AuthService.login(email: userEmail!, password: password!);
+                    if (message.contains('Success')) {
+                      Navigator.pushNamed(context, ChatScreen.id);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(message),
+                        ),
+                      );
+                    }
                   }
-                }
-              },
-            ),
-            RoundedButton(
-              buttonText: 'Register',
-              color: Colors.grey.shade400,
-              onPressed: () async {
-                Navigator.pushNamed(context, RegistrationScreen.id);
-              },
-            ),
-          ],
+                },
+              ),
+              RoundedButton(
+                buttonText: 'Register',
+                color: Colors.grey.shade400,
+                onPressed: () async {
+                  Navigator.pushNamed(context, RegistrationScreen.id);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -2,7 +2,7 @@
 
 import 'package:email_auth/components/rounded_button.dart';
 import 'package:email_auth/constants.dart';
-import 'package:email_auth/screens/chat_screen.dart';
+import 'package:email_auth/screens/home_screen.dart';
 import 'package:email_auth/screens/registration_screen.dart';
 import 'package:email_auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const ChatScreen(),
+                                  builder: (context) => const HomeScreen(),
                                 ));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(

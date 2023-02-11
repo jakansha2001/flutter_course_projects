@@ -1,5 +1,4 @@
 import 'package:email_auth/firebase_options.dart';
-import 'package:email_auth/screens/chat_screen.dart';
 import 'package:email_auth/screens/login_screen.dart';
 import 'package:email_auth/screens/registration_screen.dart';
 import 'package:email_auth/screens/welcome_screen.dart';

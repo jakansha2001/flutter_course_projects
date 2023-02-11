@@ -62,7 +62,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                   tag: 'logo',
                   child: SizedBox(
                     height: 60.0,
-                    child: Image.asset('images/logo.png'),
+                    child: Image.asset('images/logo1.png'),
                   ),
                 ),
                 Text(

@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); //initializing the firebase app ensuring that the UI is not rendered until our initialization is not done
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
